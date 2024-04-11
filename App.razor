@@ -1,0 +1,46 @@
+﻿<div class="container" style="margin: 15px auto;max-width:600px; ">
+    <IgbGrid class="container list"
+             Data="_sampleData"
+             Height="300px"
+             PrimaryKey="@nameof(Prefecture.Id)"
+             AutoGenerate="false"
+             DisplayDensity="DisplayDensity.Compact"
+             SelectRowOnClick="false">
+
+        <IgbColumn Field="@nameof(Prefecture.Id)" Hidden="true" />
+        <IgbColumn Field="@nameof(Prefecture.Name)" Header="都道府県" Width="20%" />
+        <IgbColumn Field="@nameof(Prefecture.Degree)" Header="最高気温 [℃]" Width="20%" Resizable="true">
+            @* ヘッダーテキストを半角スペースで分割しそれぞれ別の<div>要素で取得します*@
+            <HeaderTemplate>
+                @* スペースで分割した 1 つ目の部分（最高気温）を取得しています *@
+                <div>@(context.Column.Header.Split(' ')[0])</div>
+                @* スペースで分割した 2 つ目の部分（[℃]）を取得しています *@
+                <div>@(context.Column.Header.Split(' ')[1])</div>
+            </HeaderTemplate>
+        </IgbColumn>
+
+        <IgbColumn Field="@nameof(Prefecture.Note)" Header="備考" Width="60%" Resizable="true" />
+    </IgbGrid>
+</div>
+
+@code
+{
+    public class Prefecture
+    {
+        public int Id { get; set; }
+        public string? Name { get; set; }
+        public double Degree { get; set; }
+        public string? Note { get; set; }
+    };
+
+    private List<Prefecture> _sampleData = new()
+    {
+        new() { Id = 1, Name = "東京都",Degree = 20.1, Note = "日中は比較的温かいですが、夜は冷え込む可能性があります。"},
+        new() { Id = 2, Name = "大阪府",Degree = 15.5, Note = "日中の気温は穏やかですが、夜は少し寒く感じるかもしれません。"},
+        new() { Id = 3, Name = "愛知県",Degree = 20.6, Note = "日中は暖かくなりますが、湿度が低いため体感温度は高く感じるかもしれません。"},
+        new() { Id = 4, Name = "福岡県",Degree = 18.4, Note = "日中は過ごしやすい気温ですが、午後には雨が降る可能性があります。"},
+        new() { Id = 5, Name = "北海道",Degree =  4.1, Note = "曇り空が広がります。日中の気温は4度ほどで、冷涼な一日となる見込みです。夜になるとさらに冷え込むため、十分な防寒対策が必要です。"},
+        new() { Id = 6, Name = "沖縄県",Degree = 24.8, Note = "日中は暑くなる傾向がありますので、日焼け対策を忘れずに。"},
+    };
+
+}

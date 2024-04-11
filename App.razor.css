@@ -1,0 +1,13 @@
+﻿/*ヘッダーのスタイル調整する*/
+::deep .igx-grid-th__title {
+    line-height: normal;
+    white-space: normal;
+    align-self: center;
+    align-items: flex-start;
+    text-align: left;
+}
+
+/*セル内の文字列を折り返す*/
+::deep .igx-grid__td-text {
+    white-space: unset;
+}
